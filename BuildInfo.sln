@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildInfo.Nuget", "BuildInfo.Nuget", "{32B75E84-49E6-AB2B-B975-B56E516CB3E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildInfo", "BuildInfo.Nuget\BuildInfo.csproj", "{167273B6-670C-4D0E-9CAA-23EA212C0970}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildInfo", "BuildInfo.Nuget\BuildInfo.Nuget.csproj", "{167273B6-670C-4D0E-9CAA-23EA212C0970}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildInfo.Sample", "BuildInfo.Sample\BuildInfo.Sample.csproj", "{D7DDAF32-D255-42A7-9D82-DCFFE4EC95BE}"
 EndProject
