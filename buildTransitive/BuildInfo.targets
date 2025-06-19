@@ -1,0 +1,7 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="BuildInfo_PostBuild" AfterTargets="Build">
+    <Message Text="📦 BuildInfo: Custom target executed after build." Importance="high" />
+  </Target>
+
+</Project>
