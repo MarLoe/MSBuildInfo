@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="buildTransitive\BuildInfo.targets" Pack="true" PackagePath="buildTransitive\BuildInfo.targets" />
+    <None Include="build\BuildInfo.targets" Pack="true" PackagePath="build\BuildInfo.targets" />
   </ItemGroup>
 
 </Project>

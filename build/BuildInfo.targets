@@ -1,7 +1,12 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+  <UsingTask
+    TaskName="BuildInfoTask"
+    AssemblyFile="$(MSBuildThisFileDirectory)..\tools\BuildInfo.Tasks.dll" />
+
   <Target Name="BuildInfo_PostBuild" AfterTargets="Build">
     <Message Text="📦 BuildInfo: Custom target executed after build." Importance="high" />
+    <BuildInfoTask />
   </Target>
 
 </Project>
