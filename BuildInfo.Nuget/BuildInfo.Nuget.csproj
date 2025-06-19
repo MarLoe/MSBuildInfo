@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0</TargetFrameworks>
+    <TargetFramework>net9.0</TargetFramework>
     <AssemblyName>BuildInfo.Tasks</AssemblyName>
     <OutputType>Library</OutputType>
-    <IncludeBuildOutput>true</IncludeBuildOutput>
+    <Nullable>enable</Nullable>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageOutputPath>./nupkg</PackageOutputPath>
   </PropertyGroup>
 
@@ -16,7 +17,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="build\BuildInfo.targets" Pack="true" PackagePath="build\BuildInfo.targets" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.14.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="build\BuildInfo.targets" Pack="true" PackagePath="build\" />
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="tools\" />
   </ItemGroup>
 
   <Target Name="DeleteLocalCache" BeforeTargets="Pack">

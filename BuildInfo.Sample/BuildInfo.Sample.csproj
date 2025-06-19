@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildInfo" Version="1.0.0" />
+    <PackageReference Include="BuildInfo" Version="*" />
   </ItemGroup>
 
   <Target Name="PackBuildInfoBeforeBuild" BeforeTargets="Restore">

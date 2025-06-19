@@ -1,12 +1,17 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <!-- <UsingTask
+  <UsingTask
     TaskName="BuildInfoTask"
-    AssemblyFile="$(MSBuildThisFileDirectory)..\tools\BuildInfo.Tasks.dll" /> -->
+    AssemblyFile="$(MSBuildThisFileDirectory)..\tools\BuildInfo.Tasks.dll" />
 
   <Target Name="BuildInfo_PostBuild" AfterTargets="Build">
-    <Message Text="📦 BuildInfo: Custom target executed after build." Importance="high" />
-    <!-- <BuildInfoTask /> -->
+    <PropertyGroup>
+      <BuildInfoPath Condition="'$(BuildInfoPath)' == ''">$(PublishDir)</BuildInfoPath>
+      <BuildInfoPath Condition="'$(BuildInfoPath)' == ''">$(OutputPath)</BuildInfoPath>
+      <BuildInfoName Condition="'$(BuildInfoName)' == ''">BuildInfo.json</BuildInfoName>
+    </PropertyGroup>
+
+    <BuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" />
   </Target>
 
 </Project>
