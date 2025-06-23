@@ -1,0 +1,12 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="GenerateBuildInfo">
+    <PropertyGroup>
+      <CustomValue>This is my value</CustomValue>
+    </PropertyGroup>
+    <ItemGroup>
+      <BuildInfo Include="CustomInfo" Value="$(CustomValue)" />
+    </ItemGroup>
+  </Target>
+
+</Project>

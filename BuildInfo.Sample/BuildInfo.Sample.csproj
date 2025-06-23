@@ -9,6 +9,8 @@
     <PackageReference Include="BuildInfo" Version="*" />
   </ItemGroup>
 
+  <Import Project="BuildInfo.build.targets" />
+
   <Target Name="PackBuildInfoBeforeBuild" BeforeTargets="Restore">
     <Exec Command="dotnet pack ../BuildInfo.Nuget/BuildInfo.Nuget.csproj" />
   </Target>
