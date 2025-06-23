@@ -1,11 +1,15 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+  <Target Name="GenerateBuildInfo" />
+
   <UsingTask
     TaskName="BuildInfoTask"
     AssemblyFile="$(MSBuildThisFileDirectory)..\tools\BuildInfo.Tasks.dll" />
 
-  <Target Name="BuildInfo_PostBuild" AfterTargets="Build">
+  <Target Name="BuildInfo_PostBuild" AfterTargets="Build" DependsOnTargets="GenerateBuildInfo">
     <PropertyGroup>
+      <BuildTargetFramework Condition="'$(BuildTargetFramework)' == ''">$(TargetFramework)</BuildTargetFramework>
+
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_AndroidPackage)</BuildInfoId>
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_BundleIdentifier)</BuildInfoId>
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(ApplicationId)</BuildInfoId>
@@ -15,9 +19,8 @@
 
       <BuildInfoVariant Condition="'$(BuildInfoDisplayVersion)' == ''">$(BuildVariant)</BuildInfoVariant>
       <BuildInfoVariant Condition="'$(BuildInfoVariant)' == ''">$(ApplicationVariant)</BuildInfoVariant>
-
-      <BuildTargetFramework Condition="'$(BuildTargetFramework)' == ''">$(TargetFramework)</BuildTargetFramework>
     </PropertyGroup>
+
     <PropertyGroup>
       <BuildInfoPath Condition="'$(BuildInfoPath)' == ''">$(PublishDir)</BuildInfoPath>
       <BuildInfoPath Condition="'$(BuildInfoPath)' == ''">$(OutputPath)</BuildInfoPath>

@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="build\BuildInfo.targets" Pack="true" PackagePath="build\" />
+    <None Include="build\BuildInfo.props" Pack="true" PackagePath="build\" />
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="tools\" />
   </ItemGroup>
 
