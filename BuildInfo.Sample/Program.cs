@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace BuildInfo.Sample
 {
@@ -6,7 +7,12 @@ namespace BuildInfo.Sample
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var buildInfo = Path.Combine("publish", "BuildInfo.json");
+            if (File.Exists(buildInfo))
+            {
+                var lines = File.ReadAllLines(buildInfo);
+                Console.WriteLine(string.Join(Environment.NewLine, lines));
+            }
         }
     }
 }
