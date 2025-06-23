@@ -34,7 +34,21 @@
       <BuildInfo Key="BuildInfoName" Include="$(BuildInfoName)" />
     </ItemGroup>
 
-    <BuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" BuildInfo="@(BuildInfo)" />
+    <CreateItem Include='"%(BuildInfo.Key)": "%(BuildInfo.Identity)"'>
+      <Output TaskParameter="Include" ItemName="BuildInfoJson" />
+    </CreateItem>
+
+    <CreateItem Include="{">
+      <Output TaskParameter="Include" ItemName="BuildInfoJsonWrapped" />
+    </CreateItem>
+    <CreateItem Include="@(BuildInfoJson, ',&#x0A;')">
+      <Output TaskParameter="Include" ItemName="BuildInfoJsonWrapped" />
+    </CreateItem>
+    <CreateItem Include="}">
+      <Output TaskParameter="Include" ItemName="BuildInfoJsonWrapped" />
+    </CreateItem>
+
+    <WriteLinesToFile File="$(BuildInfoPath)/$(BuildInfoName)" Lines="@(BuildInfoJsonWrapped)" Overwrite="true" Encoding="UTF-8" />
   </Target>
 
 </Project>
