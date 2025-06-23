@@ -1,36 +1,77 @@
 using System.IO;
-using System.Collections;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using System.Collections.Generic;
+using System;
+using System.Text.Json;
+using System.Text.Encodings.Web;
 
-public class BuildInfoTask : Task
+namespace BuildInfo.Nuget.TaskCode
 {
-    [Required]
-    public string Path { get; set; } = string.Empty;
-
-    [Required]
-    public string Name { get; set; } = string.Empty;
-
-    [Required]
-    public ITaskItem[] BuildInfo { get; set; } = [];
-
-    public override bool Execute()
+    public class BuildInfoTask : Task
     {
-        Log.LogMessage(MessageImportance.High, $@"🧠 BuildInfoTask path: {System.IO.Path.Combine(Path, Name)}");
 
-        // You can also access MSBuild properties passed as parameters here.
-        foreach (var param in BuildInfo)
+        private readonly JsonSerializerOptions _jsonOptions = new()
         {
-            var metaData = param.GetMetadata("Key");
-            if (string.IsNullOrEmpty(metaData))
+            WriteIndented = true,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+        };
+
+        [Required]
+        public string Path { get; set; } = string.Empty;
+
+        [Required]
+        public string Name { get; set; } = string.Empty;
+
+        [Required]
+        public ITaskItem[] BuildInfo { get; set; } = [];
+
+        // public string? BuildInfo1 { get; set; } = default;
+
+        public override bool Execute()
+        {
+            var fileName = System.IO.Path.Combine(Path, Name);
+            Log.LogMessage(MessageImportance.Normal, $@"Writing BuildInfo to: {fileName}");
+
+            // Access all environment variables
+            // var envVars = Environment.GetEnvironmentVariables();
+
+            // foreach (DictionaryEntry de in envVars)
+            // {
+            //     Log.LogMessage(MessageImportance.High, $"{de.Key} = {de.Value}");
+            // }
+
+            // Log.LogMessage(MessageImportance.High, $"😀 Parameters: {BuildInfo}");
+
+            // if (BuildInfo1 is not null)
             {
-                Log.LogWarning($"Property with value {param.ItemSpec} does not have a Key. Use <BuildInfo Key=\"Name\"");
-                continue;
+                // Log.LogMessage(MessageImportance.High, $"😀 {nameof(BuildInfo1)}: {BuildInfo1}");
             }
 
-            Log.LogMessage(MessageImportance.High, $"{metaData}={param.ItemSpec}");
-        }
+            var buildInfo = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-        return true;
+            foreach (var param in BuildInfo)
+            {
+                var key = param.GetMetadata("Key")?.Trim();
+                if (string.IsNullOrEmpty(key))
+                {
+                    Log.LogWarning($"Property with value {param.ItemSpec} does not have a Key. Use <BuildInfo Key=\"Name\"");
+                    continue;
+                }
+
+                if (buildInfo.ContainsKey(key))
+                {
+                    Log.LogWarning($"Duplicate key '{key}' found. Overwriting previous value.");
+                }
+
+                buildInfo[key] = param.ItemSpec?.Trim() ?? string.Empty;
+            }
+
+
+            var json = JsonSerializer.Serialize(buildInfo, _jsonOptions);
+            File.WriteAllText(fileName, json);
+
+            return true;
+        }
     }
 }
