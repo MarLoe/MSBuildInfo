@@ -28,13 +28,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <BuildInfo Key="BuildTargetFramework" Include="$(BuildTargetFramework)" />
-      <BuildInfo Key="BuildInfoId" Include="$(BuildInfoId)" />
-      <BuildInfo Key="BuildInfoVersion" Include="$(BuildInfoVersion)" />
-      <BuildInfo Key="BuildInfoDisplayVersion" Include="$(BuildInfoDisplayVersion)" />
-      <BuildInfo Key="BuildInfoTitle" Include="$(BuildInfoTitle)" />
-      <BuildInfo Key="BuildInfoVariant" Include="$(BuildInfoVariant)" />
-      <BuildInfo Key="BuildInfoName" Include="$(BuildInfoName)" />
+      <BuildInfo Include="BuildTargetFramework" Value="$(BuildTargetFramework)" />
+      <BuildInfo Include="BuildInfoId" Value="$(BuildInfoId)" />
+      <BuildInfo Include="BuildInfoVersion" Value="$(BuildInfoVersion)" />
+      <BuildInfo Include="BuildInfoDisplayVersion" Value="$(BuildInfoDisplayVersion)" />
+      <BuildInfo Include="BuildInfoTitle" Value="$(BuildInfoTitle)" />
+      <BuildInfo Include="BuildInfoVariant" Value="$(BuildInfoVariant)" />
+      <BuildInfo Include="BuildInfoName" Value="$(BuildInfoName)" />
     </ItemGroup>
 
     <BuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" BuildInfo="@(BuildInfo)" />

@@ -52,7 +52,7 @@ namespace BuildInfo.Nuget.TaskCode
 
             foreach (var param in BuildInfo)
             {
-                var key = param.GetMetadata("Key")?.Trim();
+                var key = param.ItemSpec?.Trim();
                 if (string.IsNullOrEmpty(key))
                 {
                     Log.LogWarning($"Property with value {param.ItemSpec} does not have a Key. Use <BuildInfo Key=\"Name\"");
@@ -64,7 +64,7 @@ namespace BuildInfo.Nuget.TaskCode
                     Log.LogWarning($"Duplicate key '{key}' found. Overwriting previous value.");
                 }
 
-                buildInfo[key] = param.ItemSpec?.Trim() ?? string.Empty;
+                buildInfo[key] = param.GetMetadata("Value")?.Trim() ?? string.Empty;
             }
 
 
