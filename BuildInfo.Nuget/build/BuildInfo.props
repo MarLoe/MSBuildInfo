@@ -8,7 +8,11 @@
 
   <Target Name="BuildInfo_PostBuild" AfterTargets="Build" DependsOnTargets="GenerateBuildInfo">
     <PropertyGroup>
-      <BuildTargetFramework Condition="'$(BuildTargetFramework)' == ''">$(TargetFramework)</BuildTargetFramework>
+      <BuildInfoTargetFramework Condition="'$(BuildInfoTargetFramework)' == ''">$(TargetFramework)</BuildInfoTargetFramework>
+      <BuildInfoPlatform Condition="'$(BuildInfoPlatform)' == ''">$(Platform)</BuildInfoPlatform>
+      <BuildInfoConfiguration Condition="'$(BuildInfoConfiguration)' == ''">$(Configuration)</BuildInfoConfiguration>
+      <BuildInfoPackageId Condition="'$(BuildInfoPackageId)' == ''">$(PackageId)</BuildInfoPackageId>
+      
 
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_AndroidPackage)</BuildInfoId>
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_BundleIdentifier)</BuildInfoId>
@@ -28,13 +32,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <BuildInfo Include="BuildTargetFramework" Value="$(BuildTargetFramework)" />
+      <BuildInfo Include="TargetFramework" Value="$(BuildInfoTargetFramework)" />
+      <BuildInfo Include="Platform" Value="$(BuildInfoPlatform)" />
+      <BuildInfo Include="Configuration" Value="$(BuildInfoConfiguration)" />
+      <BuildInfo Include="PackageId" Value="$(BuildInfoPackageId)" />
       <BuildInfo Include="BuildInfoId" Value="$(BuildInfoId)" />
       <BuildInfo Include="BuildInfoVersion" Value="$(BuildInfoVersion)" />
       <BuildInfo Include="BuildInfoDisplayVersion" Value="$(BuildInfoDisplayVersion)" />
       <BuildInfo Include="BuildInfoTitle" Value="$(BuildInfoTitle)" />
       <BuildInfo Include="BuildInfoVariant" Value="$(BuildInfoVariant)" />
-      <BuildInfo Include="BuildInfoName" Value="$(BuildInfoName)" />
     </ItemGroup>
 
     <BuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" BuildInfo="@(BuildInfo)" />
