@@ -3,10 +3,10 @@
   <Target Name="GenerateBuildInfo" />
 
   <UsingTask
-    TaskName="BuildInfoTask"
-    AssemblyFile="$(MSBuildThisFileDirectory)..\tools\BuildInfo.Tasks.dll" />
+    TaskName="MSBuildInfoTask"
+    AssemblyFile="$(MSBuildThisFileDirectory)../tools/MSBuildInfo.Tasks.dll" />
 
-  <Target Name="BuildInfo_PostBuild" AfterTargets="Build" DependsOnTargets="GenerateBuildInfo">
+  <Target Name="BuildInfoPostBuild" AfterTargets="Build" DependsOnTargets="GenerateBuildInfo">
     <PropertyGroup>
       <BuildInfoTargetFramework Condition="'$(BuildInfoTargetFramework)' == ''">$(TargetFramework)</BuildInfoTargetFramework>
       <BuildInfoPlatform Condition="'$(BuildInfoPlatform)' == ''">$(Platform)</BuildInfoPlatform>
@@ -43,7 +43,7 @@
       <BuildInfo Include="BuildInfoVariant" Value="$(BuildInfoVariant)" />
     </ItemGroup>
 
-    <BuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" BuildInfo="@(BuildInfo)" />
+    <MSBuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" BuildInfo="@(BuildInfo)" />
   </Target>
 
 </Project>

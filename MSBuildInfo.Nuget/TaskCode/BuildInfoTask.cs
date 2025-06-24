@@ -6,9 +6,9 @@ using System;
 using System.Text.Json;
 using System.Text.Encodings.Web;
 
-namespace BuildInfo.Nuget.TaskCode
+namespace MSBuildInfo.Nuget.TaskCode
 {
-    public class BuildInfoTask : Task
+    public class MSBuildInfoTask : Task
     {
 
         private readonly JsonSerializerOptions _jsonOptions = new()

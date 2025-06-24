@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace BuildInfo.Sample
+namespace MSBuildInfo.Sample
 {
     internal class Program
     {
