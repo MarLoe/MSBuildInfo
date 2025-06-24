@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildInfo" Version="*" />
+    <PackageReference Include="MSBuildInfo" Version="*" />
   </ItemGroup>
 
+  <Import Project="MSBuildInfo.build.targets" />
+
   <Target Name="PackBuildInfoBeforeBuild" BeforeTargets="Restore">
-    <Exec Command="dotnet pack ../BuildInfo.Nuget/BuildInfo.Nuget.csproj" />
+    <Exec Command="dotnet pack ../MSBuildInfo.Nuget/MSBuildInfo.Nuget.csproj" />
   </Target>
 
 </Project>

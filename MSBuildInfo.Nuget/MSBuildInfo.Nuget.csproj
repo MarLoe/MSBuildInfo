@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <AssemblyName>BuildInfo.Tasks</AssemblyName>
+    <AssemblyName>MSBuildInfo.Tasks</AssemblyName>
     <OutputType>Library</OutputType>
     <Nullable>enable</Nullable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
@@ -10,19 +10,19 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>BuildInfo</PackageId>
+    <PackageId>MSBuildInfo</PackageId>
     <Version>1.0.0</Version>
     <Authors>Martin Løbger</Authors>
-    <Description>Generates a BuildInfo.json file during build - containing information about the build</Description>
+    <Description>Generates a MSBuildInfo.json file during build - containing information about the build</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.14.8" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="*" PrivateAssets="all" ExcludeAssets="Runtime" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="build\BuildInfo.targets" Pack="true" PackagePath="build\" />
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="tools\" />
+    <None Update="build/MSBuildInfo.props" Pack="true" PackagePath="build/" />
+    <None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="tools/" />
   </ItemGroup>
 
   <Target Name="DeleteLocalCache" BeforeTargets="Pack">
