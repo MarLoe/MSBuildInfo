@@ -21,7 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="build/MSBuildInfo.props" Pack="true" PackagePath="build/" />
+    <None Include="build/MSBuildInfo.props" Pack="true" PackagePath="build/" />
+    <None Include="build/MSBuildInfo.targets" Pack="true" PackagePath="build/" />
     <None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="tools/" />
   </ItemGroup>
 
