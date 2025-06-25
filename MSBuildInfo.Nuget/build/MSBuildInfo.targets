@@ -43,9 +43,6 @@
       <BuildInfo Include="BuildInfoVariant" Value="$(BuildInfoVariant)" />
     </ItemGroup>
 
-    <Message Text="😀 PublishDir: $(PublishDir)" Importance="High" />
-    <Message Text="😀 OutputPath: $(OutputPath)" Importance="High" />
-
     <MSBuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" BuildInfo="@(BuildInfo)" />
   </Target>
 
