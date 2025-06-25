@@ -69,6 +69,9 @@ namespace MSBuildInfo.Nuget.TaskCode
 
 
             var json = JsonSerializer.Serialize(buildInfo, _jsonOptions);
+
+            // Make sure the directory is present before writing the file
+            Directory.CreateDirectory(Path);
             File.WriteAllText(fileName, json);
 
             return true;
