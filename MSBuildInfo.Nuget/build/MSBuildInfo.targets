@@ -10,14 +10,14 @@
     TaskName="MSBuildInfoTask"
     AssemblyFile="$(MSBuildThisFileDirectory)../tools/MSBuildInfo.Tasks.dll" />
 
-  <Target Name="BuildInfoBeforeBuild" BeforeTargets="Build">
+  <Target Name="MSBuildInfoBeforeBuild" BeforeTargets="Build" DependsOnTargets="RemoveBuildInfo">
     <ItemGroup>
       <BuildInfoFiles Include="$(BuildInfoPath)/$(BuildInfoName)" />
     </ItemGroup>
     <Delete Files="@(BuildInfoFiles)" />
   </Target>
 
-  <Target Name="BuildInfoAfterBuild" AfterTargets="Build" DependsOnTargets="GenerateBuildInfo">
+  <Target Name="MSBuildInfoAfterBuild" AfterTargets="Build" DependsOnTargets="GenerateBuildInfo">
     <PropertyGroup>
       <BuildInfoTargetFramework Condition="'$(BuildInfoTargetFramework)' == ''">$(TargetFramework)</BuildInfoTargetFramework>
       <BuildInfoPlatform Condition="'$(BuildInfoPlatform)' == ''">$(Platform)</BuildInfoPlatform>
