@@ -26,28 +26,8 @@ namespace MSBuildInfo.Nuget.TaskCode
         [Required]
         public ITaskItem[] BuildInfo { get; set; } = [];
 
-        // public string? BuildInfo1 { get; set; } = default;
-
         public override bool Execute()
         {
-            var fileName = System.IO.Path.Combine(Path, Name);
-            Log.LogMessage(MessageImportance.Normal, $@"Writing BuildInfo to: {fileName}");
-
-            // Access all environment variables
-            // var envVars = Environment.GetEnvironmentVariables();
-
-            // foreach (DictionaryEntry de in envVars)
-            // {
-            //     Log.LogMessage(MessageImportance.High, $"{de.Key} = {de.Value}");
-            // }
-
-            // Log.LogMessage(MessageImportance.High, $"😀 Parameters: {BuildInfo}");
-
-            // if (BuildInfo1 is not null)
-            {
-                // Log.LogMessage(MessageImportance.High, $"😀 {nameof(BuildInfo1)}: {BuildInfo1}");
-            }
-
             var buildInfo = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var param in BuildInfo)
@@ -55,7 +35,7 @@ namespace MSBuildInfo.Nuget.TaskCode
                 var key = param.ItemSpec?.Trim();
                 if (string.IsNullOrEmpty(key))
                 {
-                    Log.LogWarning($"Property with value {param.ItemSpec} does not have a Key. Use <BuildInfo Key=\"Name\"");
+                    Log.LogWarning($"<BuildInfo /> without 'Include' observed - ignoring");
                     continue;
                 }
 
@@ -72,7 +52,7 @@ namespace MSBuildInfo.Nuget.TaskCode
 
             // Make sure the directory is present before writing the file
             Directory.CreateDirectory(Path);
-            File.WriteAllText(fileName, json);
+            File.WriteAllText(System.IO.Path.Combine(Path, Name), json);
 
             return true;
         }
