@@ -1,12 +1,23 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Target Name="GenerateBuildInfo" />
+  <PropertyGroup>
+    <BuildInfoPath Condition="'$(BuildInfoPath)' == '' AND '$(_IsPublishing)' == 'true'">$(PublishDir)</BuildInfoPath>
+    <BuildInfoPath Condition="'$(BuildInfoPath)' == ''">$(OutputPath)</BuildInfoPath>
+    <BuildInfoName Condition="'$(BuildInfoName)' == ''">BuildInfo.json</BuildInfoName>
+  </PropertyGroup>
 
   <UsingTask
     TaskName="MSBuildInfoTask"
     AssemblyFile="$(MSBuildThisFileDirectory)../tools/MSBuildInfo.Tasks.dll" />
 
-  <Target Name="BuildInfoPostBuild" AfterTargets="Build" DependsOnTargets="GenerateBuildInfo">
+  <Target Name="BuildInfoBeforeBuild" BeforeTargets="Build">
+    <ItemGroup>
+      <BuildInfoFiles Include="$(BuildInfoPath)/$(BuildInfoName)" />
+    </ItemGroup>
+    <Delete Files="@(BuildInfoFiles)" />
+  </Target>
+
+  <Target Name="BuildInfoAfterBuild" AfterTargets="Build" DependsOnTargets="GenerateBuildInfo">
     <PropertyGroup>
       <BuildInfoTargetFramework Condition="'$(BuildInfoTargetFramework)' == ''">$(TargetFramework)</BuildInfoTargetFramework>
       <BuildInfoPlatform Condition="'$(BuildInfoPlatform)' == ''">$(Platform)</BuildInfoPlatform>
@@ -23,12 +34,6 @@
 
       <BuildInfoVariant Condition="'$(BuildInfoDisplayVersion)' == ''">$(BuildVariant)</BuildInfoVariant>
       <BuildInfoVariant Condition="'$(BuildInfoVariant)' == ''">$(ApplicationVariant)</BuildInfoVariant>
-    </PropertyGroup>
-
-    <PropertyGroup>
-      <BuildInfoPath Condition="'$(BuildInfoPath)' == '' AND '$(_IsPublishing)' == 'true'">$(PublishDir)</BuildInfoPath>
-      <BuildInfoPath Condition="'$(BuildInfoPath)' == ''">$(OutputPath)</BuildInfoPath>
-      <BuildInfoName Condition="'$(BuildInfoName)' == ''">BuildInfo.json</BuildInfoName>
     </PropertyGroup>
 
     <ItemGroup>
