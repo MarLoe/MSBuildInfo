@@ -13,7 +13,15 @@
     <PackageId>MSBuildInfo</PackageId>
     <Version>1.0.0</Version>
     <Authors>Martin Løbger</Authors>
+    <Owner>Martin Løbger</Owner>
     <Description>Generates a BuildInfo.json file during build - containing information about the build</Description>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <Copyright>Copyright 2025 - Martin Løbger</Copyright>
+    <Tags>MSBuild dotnet maui Diagnostic Analyzer Properties</Tags>
+    <License>MIT License</License>
+    <LicenseUrl>https://github.com/MarLoe/MSBuildInfo/raw/refs/heads/master/LICENSE</LicenseUrl>
+    <ProjectUrl>https://github.com/MarLoe/MSBuildInfo</ProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="/"/>
     <None Include="build/MSBuildInfo.props" Pack="true" PackagePath="build/" />
     <None Include="build/MSBuildInfo.targets" Pack="true" PackagePath="build/" />
     <None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="tools/" />
