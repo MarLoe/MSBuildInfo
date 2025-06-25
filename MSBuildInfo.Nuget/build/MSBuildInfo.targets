@@ -37,10 +37,10 @@
       <BuildInfo Include="Platform" Value="$(BuildInfoPlatform)" />
       <BuildInfo Include="Configuration" Value="$(BuildInfoConfiguration)" />
       <BuildInfo Include="PackageId" Value="$(BuildInfoPackageId)" />
-      <BuildInfo Include="BuildInfoId" Value="$(BuildInfoId)" />
-      <BuildInfo Include="BuildInfoVersion" Value="$(BuildInfoVersion)" />
-      <BuildInfo Include="BuildInfoDisplayVersion" Value="$(BuildInfoDisplayVersion)" />
-      <BuildInfo Include="BuildInfoTitle" Value="$(BuildInfoTitle)" />
+      <BuildInfo Condition="'$(BuildInfoId)' != ''" Include="Id" Value="$(BuildInfoId)" />
+      <BuildInfo Condition="'$(BuildInfoVersion)' != ''" Include="Version" Value="$(BuildInfoVersion)" />
+      <BuildInfo Condition="'$(BuildInfoDisplayVersion)' != ''" Include="DisplayVersion" Value="$(BuildInfoDisplayVersion)" />
+      <BuildInfo Condition="'$(BuildInfoTitle)' != ''" Include="Title" Value="$(BuildInfoTitle)" />
     </ItemGroup>
 
     <MSBuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" BuildInfo="@(BuildInfo)" />
