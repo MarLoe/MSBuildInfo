@@ -24,16 +24,12 @@
       <BuildInfoConfiguration Condition="'$(BuildInfoConfiguration)' == ''">$(Configuration)</BuildInfoConfiguration>
       <BuildInfoPackageId Condition="'$(BuildInfoPackageId)' == ''">$(PackageId)</BuildInfoPackageId>
 
-
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_AndroidPackage)</BuildInfoId>
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_BundleIdentifier)</BuildInfoId>
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(ApplicationId)</BuildInfoId>
       <BuildInfoVersion Condition="'$(BuildInfoVersion)' == ''">$(ApplicationVersion)</BuildInfoVersion>
       <BuildInfoDisplayVersion Condition="'$(BuildInfoDisplayVersion)' == ''">$(ApplicationDisplayVersion)</BuildInfoDisplayVersion>
       <BuildInfoTitle Condition="'$(BuildInfoTitle)' == ''">$(ApplicationTitle)</BuildInfoTitle>
-
-      <BuildInfoVariant Condition="'$(BuildInfoDisplayVersion)' == ''">$(BuildVariant)</BuildInfoVariant>
-      <BuildInfoVariant Condition="'$(BuildInfoVariant)' == ''">$(ApplicationVariant)</BuildInfoVariant>
     </PropertyGroup>
 
     <ItemGroup>
@@ -45,7 +41,6 @@
       <BuildInfo Include="BuildInfoVersion" Value="$(BuildInfoVersion)" />
       <BuildInfo Include="BuildInfoDisplayVersion" Value="$(BuildInfoDisplayVersion)" />
       <BuildInfo Include="BuildInfoTitle" Value="$(BuildInfoTitle)" />
-      <BuildInfo Include="BuildInfoVariant" Value="$(BuildInfoVariant)" />
     </ItemGroup>
 
     <MSBuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" BuildInfo="@(BuildInfo)" />
