@@ -7,10 +7,10 @@ namespace MSBuildInfo.Sample
     {
         static void Main(string[] args)
         {
-            var buildInfo = Path.Combine("publish", "BuildInfo.json");
-            if (File.Exists(buildInfo))
+            var files = Directory.EnumerateFiles(".", "BuildInfo.json", SearchOption.AllDirectories);
+            foreach (var file in files)
             {
-                var lines = File.ReadAllLines(buildInfo);
+                var lines = File.ReadAllLines(file);
                 Console.WriteLine(string.Join(Environment.NewLine, lines));
             }
         }

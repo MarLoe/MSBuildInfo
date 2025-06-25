@@ -6,6 +6,7 @@
     </PropertyGroup>
     <ItemGroup>
       <BuildInfo Include="CustomInfo" Value="$(CustomValue)" />
+      <BuildInfo Include="TestVariable" Value="$(TestVariable)" />
     </ItemGroup>
   </Target>
 
