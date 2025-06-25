@@ -7,6 +7,8 @@
     <ItemGroup>
       <BuildInfo Include="CustomInfo" Value="$(CustomValue)" />
       <BuildInfo Include="TestVariable" Value="$(TestVariable)" />
+      <!-- Environment variable example: -->
+      <BuildInfo Condition="'$(MD_APPLE_SDK_ROOT)' != ''" Include="MD_APPLE_SDK_ROOT" Value="$(MD_APPLE_SDK_ROOT)" />
     </ItemGroup>
   </Target>
 
