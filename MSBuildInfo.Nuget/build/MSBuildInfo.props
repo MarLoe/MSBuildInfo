@@ -4,4 +4,8 @@
 
   <Target Name="GenerateBuildInfo" />
 
+  <PropertyGroup>
+    <BuildInfoTimestamp>$([System.DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"))</BuildInfoTimestamp>
+  </PropertyGroup>
+
 </Project>

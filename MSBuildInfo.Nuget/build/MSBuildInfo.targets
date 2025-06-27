@@ -33,6 +33,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <BuildInfo Include="Timestamp" Value="$(BuildInfoTimestamp)" />
       <BuildInfo Include="TargetFramework" Value="$(BuildInfoTargetFramework)" />
       <BuildInfo Include="Platform" Value="$(BuildInfoPlatform)" />
       <BuildInfo Include="Configuration" Value="$(BuildInfoConfiguration)" />
