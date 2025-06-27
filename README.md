@@ -1,4 +1,6 @@
 # MSBuildInfo
+[![NuGet version (Newtonsoft.Json)](https://img.shields.io/nuget/v/Newtonsoft.Json.svg?style=flat-square)](https://www.nuget.org/packages/Newtonsoft.Json/)
+
 Generate json with build information during build.
 
 When building your project in your prefered CI pipeline, I found that getting information about the build could sometimes be valueable - but hard to extract.
