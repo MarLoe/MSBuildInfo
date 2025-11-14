@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Title>MSBuildInfo Generator</Title>
     <PackageId>MSBuildInfo</PackageId>
     <Version>0.3.0</Version>
     <Authors>Martin Løbger</Authors>
