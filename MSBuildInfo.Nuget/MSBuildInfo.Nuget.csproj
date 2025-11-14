@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <AssemblyName>MSBuildInfo.Tasks</AssemblyName>
+    <AssemblyName>MSBuildInfo</AssemblyName>
     <OutputType>Library</OutputType>
     <Nullable>enable</Nullable>
     <IncludeBuildOutput>true</IncludeBuildOutput>
@@ -11,17 +11,21 @@
 
   <PropertyGroup>
     <PackageId>MSBuildInfo</PackageId>
-    <Version>1.0.0</Version>
+    <Version>0.3.0</Version>
     <Authors>Martin Løbger</Authors>
     <Owner>Martin Løbger</Owner>
-    <Description>Generates a BuildInfo.json file during build - containing information about the build</Description>
+    <Description>Generates a json file during build - containing information about the build</Description>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <Copyright>Copyright 2025 - Martin Løbger</Copyright>
-    <Tags>MSBuild dotnet maui Diagnostic Analyzer Properties</Tags>
+    <NeutralLanguage>en-US</NeutralLanguage>
     <License>MIT License</License>
-    <LicenseUrl>https://github.com/MarLoe/MSBuildInfo/raw/refs/heads/master/LICENSE</LicenseUrl>
-    <ProjectUrl>https://github.com/MarLoe/MSBuildInfo</ProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>assets/icon.png</PackageIcon>
+    <PackageTags>MSBuild dotnet maui Diagnostic Analyzer Properties</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/MarLoe/MSBuildInfo</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MarLoe/MAUI.Native.Embedded</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +34,7 @@
 
   <ItemGroup>
     <None Include="../README.md" Pack="true" PackagePath="/"/>
+    <None Include="../Assets/icon.png" Pack="true" PackagePath="/assets"/>
     <None Include="build/MSBuildInfo.props" Pack="true" PackagePath="build/" />
     <None Include="build/MSBuildInfo.targets" Pack="true" PackagePath="build/" />
     <None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="tools/" />
