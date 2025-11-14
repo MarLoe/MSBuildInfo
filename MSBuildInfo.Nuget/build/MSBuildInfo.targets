@@ -8,7 +8,7 @@
 
   <UsingTask
     TaskName="MSBuildInfoTask"
-    AssemblyFile="$(MSBuildThisFileDirectory)../tools/MSBuildInfo.Tasks.dll" />
+    AssemblyFile="$(MSBuildThisFileDirectory)../tools/MSBuildInfo.dll" />
 
   <Target Name="MSBuildInfoBeforeBuild" BeforeTargets="Build" DependsOnTargets="RemoveBuildInfo">
     <ItemGroup>
