@@ -6,10 +6,6 @@
     <BuildInfoName Condition="'$(BuildInfoName)' == ''">BuildInfo.json</BuildInfoName>
   </PropertyGroup>
 
-  <UsingTask
-    TaskName="MSBuildInfoTask"
-    AssemblyFile="$(MSBuildThisFileDirectory)../tools/MSBuildInfo.dll" />
-
   <Target Name="MSBuildInfoBeforeBuild" BeforeTargets="Build" DependsOnTargets="RemoveBuildInfo">
     <ItemGroup>
       <BuildInfoFiles Include="$(BuildInfoPath)/$(BuildInfoName)" />

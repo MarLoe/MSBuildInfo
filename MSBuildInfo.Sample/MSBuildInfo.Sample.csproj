@@ -10,7 +10,6 @@
     <PackageReference Include="MSBuildInfo" Version="*" />
   </ItemGroup>
 
-
   <Target Name="PackBuildInfoBeforeBuild" BeforeTargets="Restore">
     <Exec Command="dotnet pack ../MSBuildInfo.Nuget/MSBuildInfo.Nuget.csproj" />
   </Target>

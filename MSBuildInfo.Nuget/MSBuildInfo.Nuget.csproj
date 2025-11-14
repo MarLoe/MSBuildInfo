@@ -29,15 +29,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="*" PrivateAssets="all" ExcludeAssets="Runtime" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="../README.md" Pack="true" PackagePath="/"/>
     <None Include="../Assets/icon.png" Pack="true" PackagePath="/assets"/>
     <None Include="build/MSBuildInfo.props" Pack="true" PackagePath="build/" />
     <None Include="build/MSBuildInfo.targets" Pack="true" PackagePath="build/" />
-    <None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="tools/" />
   </ItemGroup>
 
   <Target Name="DeleteLocalCache" BeforeTargets="Pack">
