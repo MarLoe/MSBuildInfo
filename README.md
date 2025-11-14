@@ -1,4 +1,6 @@
 # MSBuildInfo
+[![NuGet version (MSBuildInfo)](https://img.shields.io/nuget/v/MSBuildInfo.svg?style=flat-square)](https://www.nuget.org/packages/MSBuildInfo)
+
 Generate json with build information during build.
 
 When building your project in your prefered CI pipeline, I found that getting information about the build could sometimes be valueable - but hard to extract.
@@ -12,7 +14,7 @@ Either you can add this file next to you project file (.csproj):
 [BuildInfo.build.targets](https://github.com/MarLoe/MSBuildInfo/raw/refs/heads/master/MSBuildInfo.Sample/MSBuildInfo.build.targets).
 
 You can also add the content directly to your project (.csproj) file
-```
+```xml
 <Target Name="GenerateBuildInfo">
   <PropertyGroup>
     <CustomValue>This is my value</CustomValue>
@@ -25,8 +27,8 @@ You can also add the content directly to your project (.csproj) file
 ```
 
 In both cases you just add more entries of
-```
-    <BuildInfo Include="CustomInfo" Value="$(CustomValue)" />
+```xml
+    <BuildInfo Include="Key" Value="Value" />
 ```
 
 You cannot do both. MSBuild will only pick up the one defined last in the build process.
