@@ -41,20 +41,21 @@
     </ItemGroup>
 
     <CreateItem Include='"%(BuildInfo.Identity)": "%(BuildInfo.Value)"'>
-      <Output TaskParameter="Include" ItemName="BuildInfoJson" />
+      <Output TaskParameter="Include" ItemName="BuildInfoEntries" />
     </CreateItem>
 
-    <CreateItem Include="{">
-      <Output TaskParameter="Include" ItemName="BuildInfoJsonWrapped" />
-    </CreateItem>
-    <CreateItem Include="@(BuildInfoJson, ',&#x0A;')">
-      <Output TaskParameter="Include" ItemName="BuildInfoJsonWrapped" />
-    </CreateItem>
-    <CreateItem Include="}">
-      <Output TaskParameter="Include" ItemName="BuildInfoJsonWrapped" />
-    </CreateItem>
+    <PropertyGroup>
+      <BuildInfoJson>
+<![CDATA[
+{
+  @(BuildInfoEntries, ',
+  ')
+}
+]]>
+      </BuildInfoJson>
+    </PropertyGroup>
 
-    <WriteLinesToFile File="$(BuildInfoPath)/$(BuildInfoName)" Lines="@(BuildInfoJsonWrapped)" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(BuildInfoPath)/$(BuildInfoName)" Lines="$(BuildInfoJson)" Overwrite="true" Encoding="UTF-8" />
   </Target>
 
   <Import Condition="Exists('$(ProjectDir)BuildInfo.targets')" Project="$(ProjectDir)BuildInfo.targets" />

@@ -4,6 +4,7 @@
     <PropertyGroup>
       <CustomValue>This is my value</CustomValue>
     </PropertyGroup>
+
     <ItemGroup>
       <BuildInfo Include="CustomInfo" Value="$(CustomValue)" />
       <BuildInfo Include="TestVariable" Value="$(TestVariable)" />
