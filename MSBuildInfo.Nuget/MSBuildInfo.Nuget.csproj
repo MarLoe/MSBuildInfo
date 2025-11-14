@@ -16,7 +16,7 @@
   <PropertyGroup>
     <Title>MSBuildInfo Generator</Title>
     <PackageId>MSBuildInfo</PackageId>
-    <Version>0.3.0</Version>
+    <Version>0.3.1</Version>
     <Authors>Martin Løbger</Authors>
     <Owner>Martin Løbger</Owner>
     <Description>Generates a json file during build - containing information about the build</Description>
