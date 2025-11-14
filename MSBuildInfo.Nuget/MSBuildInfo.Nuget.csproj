@@ -1,12 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net9.0;net8.0;net7.0;net6.0</TargetFrameworks>
     <AssemblyName>MSBuildInfo</AssemblyName>
     <OutputType>Library</OutputType>
     <Nullable>enable</Nullable>
-    <IncludeBuildOutput>true</IncludeBuildOutput>
     <PackageOutputPath>./nupkg</PackageOutputPath>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Do not include .dll in the nuget package.  -->
+    <!-- This mus be changed if a C# Task is added. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -29,8 +33,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="../README.md" Pack="true" PackagePath="/"/>
-    <None Include="../Assets/icon.png" Pack="true" PackagePath="/assets"/>
+    <None Include="../README.md" Pack="true" PackagePath="/" />
+    <None Include="../Assets/icon.png" Pack="true" PackagePath="/assets" />
     <None Include="build/MSBuildInfo.props" Pack="true" PackagePath="build/" />
     <None Include="build/MSBuildInfo.targets" Pack="true" PackagePath="build/" />
   </ItemGroup>
