@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
 
 namespace MSBuildInfo.Sample
 {
@@ -10,8 +11,10 @@ namespace MSBuildInfo.Sample
             var files = Directory.EnumerateFiles(".", "BuildInfo.json", SearchOption.AllDirectories);
             foreach (var file in files)
             {
-                var lines = File.ReadAllLines(file);
-                Console.WriteLine(string.Join(Environment.NewLine, lines));
+                var json = JsonDocument.Parse(File.ReadAllText(file));
+
+                var str =  JsonSerializer.Serialize(json, new JsonSerializerOptions { WriteIndented = true });
+                Console.WriteLine(str);
             }
         }
     }

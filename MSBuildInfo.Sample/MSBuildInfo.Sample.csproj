@@ -10,6 +10,10 @@
     <PackageReference Include="MSBuildInfo" Version="*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Adding to build info before the build starts -->
+    <BuildInfo Include="Info" Value="This is added at the very beginnig of the build process" />
+  </ItemGroup>
 
   <Target Name="PackBuildInfoBeforeBuild" BeforeTargets="Restore">
     <Exec Command="dotnet pack ../MSBuildInfo.Nuget/MSBuildInfo.Nuget.csproj" />

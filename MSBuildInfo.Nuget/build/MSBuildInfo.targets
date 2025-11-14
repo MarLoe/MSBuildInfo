@@ -6,9 +6,58 @@
     <BuildInfoName Condition="'$(BuildInfoName)' == ''">BuildInfo.json</BuildInfoName>
   </PropertyGroup>
 
-  <UsingTask
-    TaskName="MSBuildInfoTask"
-    AssemblyFile="$(MSBuildThisFileDirectory)../tools/MSBuildInfo.dll" />
+  <Target Name="MSBuildInfoGenerate" DependsOnTargets="GenerateBuildInfo">
+    <PropertyGroup>
+      <BuildInfoTargetFramework Condition="'$(BuildInfoTargetFramework)' == ''">$(TargetFramework)</BuildInfoTargetFramework>
+      <BuildInfoPlatform Condition="'$(BuildInfoPlatform)' == ''">$(Platform)</BuildInfoPlatform>
+      <BuildInfoConfiguration Condition="'$(BuildInfoConfiguration)' == ''">$(Configuration)</BuildInfoConfiguration>
+      <BuildInfoPackageId Condition="'$(BuildInfoPackageId)' == ''">$(PackageId)</BuildInfoPackageId>
+      <BuildInfoVersion Condition="'$(BuildInfoVersion)' == ''">$(ApplicationVersion)</BuildInfoVersion>
+      <BuildInfoDisplayVersion Condition="'$(BuildInfoDisplayVersion)' == ''">$(ApplicationDisplayVersion)</BuildInfoDisplayVersion>
+      <BuildInfoTitle Condition="'$(BuildInfoTitle)' == ''">$(ApplicationTitle)</BuildInfoTitle>
+
+      <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_AndroidPackage)</BuildInfoId>
+      <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_BundleIdentifier)</BuildInfoId>
+      <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(ApplicationId)</BuildInfoId>
+
+      <BuildInfoPublishing>$(_IsPublishing)</BuildInfoPublishing>
+      <BuildInfoPublishing Condition="'$(BuildInfoPublishing)' == ''">false</BuildInfoPublishing>
+
+      <BuildInfoEnd>$([System.DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"))</BuildInfoEnd>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <BuildInfo Include="BuildStartTime" Value="$(BuildInfoStart)" />
+      <BuildInfo Include="BuildEndTime" Value="$(BuildInfoEnd)" />
+      <BuildInfo Include="TargetFramework" Value="$(BuildInfoTargetFramework)" />
+      <BuildInfo Include="Platform" Value="$(BuildInfoPlatform)" />
+      <BuildInfo Include="Configuration" Value="$(BuildInfoConfiguration)" />
+      <BuildInfo Include="PackageId" Value="$(BuildInfoPackageId)" />
+      <BuildInfo Include="Publishing" Value="$(BuildInfoPublishing)" />
+      <BuildInfo Condition="'$(BuildInfoId)' != ''" Include="Id" Value="$(BuildInfoId)" />
+      <BuildInfo Condition="'$(BuildInfoVersion)' != ''" Include="Version" Value="$(BuildInfoVersion)" />
+      <BuildInfo Condition="'$(BuildInfoDisplayVersion)' != ''" Include="DisplayVersion" Value="$(BuildInfoDisplayVersion)" />
+      <BuildInfo Condition="'$(BuildInfoTitle)' != ''" Include="Title" Value="$(BuildInfoTitle)" />
+    </ItemGroup>
+
+    <CreateItem Include='"%(BuildInfo.Identity)": "%(BuildInfo.Value)"'>
+      <Output TaskParameter="Include" ItemName="BuildInfoEntries" />
+    </CreateItem>
+
+    <PropertyGroup>
+      <BuildInfoJson>
+<![CDATA[
+{
+  @(BuildInfoEntries, ',
+  ')
+}
+]]>
+      </BuildInfoJson>
+    </PropertyGroup>
+
+    <WriteLinesToFile File="$(BuildInfoPath)/$(BuildInfoName)" Lines="$(BuildInfoJson)" Overwrite="true" Encoding="UTF-8" />
+  </Target>
+
 
   <Target Name="MSBuildInfoBeforeBuild" BeforeTargets="Build" DependsOnTargets="RemoveBuildInfo">
     <ItemGroup>
@@ -17,35 +66,9 @@
     <Delete Files="@(BuildInfoFiles)" />
   </Target>
 
-  <Target Name="MSBuildInfoAfterBuild" AfterTargets="Build" DependsOnTargets="GenerateBuildInfo">
-    <PropertyGroup>
-      <BuildInfoTargetFramework Condition="'$(BuildInfoTargetFramework)' == ''">$(TargetFramework)</BuildInfoTargetFramework>
-      <BuildInfoPlatform Condition="'$(BuildInfoPlatform)' == ''">$(Platform)</BuildInfoPlatform>
-      <BuildInfoConfiguration Condition="'$(BuildInfoConfiguration)' == ''">$(Configuration)</BuildInfoConfiguration>
-      <BuildInfoPackageId Condition="'$(BuildInfoPackageId)' == ''">$(PackageId)</BuildInfoPackageId>
 
-      <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_AndroidPackage)</BuildInfoId>
-      <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_BundleIdentifier)</BuildInfoId>
-      <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(ApplicationId)</BuildInfoId>
-      <BuildInfoVersion Condition="'$(BuildInfoVersion)' == ''">$(ApplicationVersion)</BuildInfoVersion>
-      <BuildInfoDisplayVersion Condition="'$(BuildInfoDisplayVersion)' == ''">$(ApplicationDisplayVersion)</BuildInfoDisplayVersion>
-      <BuildInfoTitle Condition="'$(BuildInfoTitle)' == ''">$(ApplicationTitle)</BuildInfoTitle>
-    </PropertyGroup>
+  <Target Name="MSBuildInfoAfterBuild" AfterTargets="Build" DependsOnTargets="MSBuildInfoGenerate" />
 
-    <ItemGroup>
-      <BuildInfo Include="Timestamp" Value="$(BuildInfoTimestamp)" />
-      <BuildInfo Include="TargetFramework" Value="$(BuildInfoTargetFramework)" />
-      <BuildInfo Include="Platform" Value="$(BuildInfoPlatform)" />
-      <BuildInfo Include="Configuration" Value="$(BuildInfoConfiguration)" />
-      <BuildInfo Include="PackageId" Value="$(BuildInfoPackageId)" />
-      <BuildInfo Condition="'$(BuildInfoId)' != ''" Include="Id" Value="$(BuildInfoId)" />
-      <BuildInfo Condition="'$(BuildInfoVersion)' != ''" Include="Version" Value="$(BuildInfoVersion)" />
-      <BuildInfo Condition="'$(BuildInfoDisplayVersion)' != ''" Include="DisplayVersion" Value="$(BuildInfoDisplayVersion)" />
-      <BuildInfo Condition="'$(BuildInfoTitle)' != ''" Include="Title" Value="$(BuildInfoTitle)" />
-    </ItemGroup>
-
-    <MSBuildInfoTask Path="$(BuildInfoPath)" Name="$(BuildInfoName)" BuildInfo="@(BuildInfo)" />
-  </Target>
 
   <Import Condition="Exists('$(ProjectDir)BuildInfo.targets')" Project="$(ProjectDir)BuildInfo.targets" />
   <Import Condition="Exists('$(ProjectDir)MSBuildInfo.targets')" Project="$(ProjectDir)MSBuildInfo.targets" />
