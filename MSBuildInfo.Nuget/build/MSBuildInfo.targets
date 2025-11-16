@@ -68,9 +68,11 @@
     <Delete Files="@(BuildInfoFiles)" />
   </Target>
 
-
   <Target Name="MSBuildInfoAfterBuild" AfterTargets="Build" DependsOnTargets="MSBuildInfoGenerate" />
 
+  <!-- Targets for ad-hoc building -->
+  <Target Name="BuildInfo" DependsOnTargets="MSBuildInfoGenerate" />
+  <Target Name="MSBuildInfo" DependsOnTargets="MSBuildInfoGenerate" />
 
   <Import Condition="Exists('$(ProjectDir)BuildInfo.targets')" Project="$(ProjectDir)BuildInfo.targets" />
   <Import Condition="Exists('$(ProjectDir)MSBuildInfo.targets')" Project="$(ProjectDir)MSBuildInfo.targets" />
