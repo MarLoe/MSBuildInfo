@@ -14,6 +14,7 @@
       <BuildInfoPackageId Condition="'$(BuildInfoPackageId)' == ''">$(PackageId)</BuildInfoPackageId>
       <BuildInfoVersion Condition="'$(BuildInfoVersion)' == ''">$(ApplicationVersion)</BuildInfoVersion>
       <BuildInfoDisplayVersion Condition="'$(BuildInfoDisplayVersion)' == ''">$(ApplicationDisplayVersion)</BuildInfoDisplayVersion>
+      <BuildInfoFullVersion Condition="'$(BuildInfoFullVersion)' == ''">$(BuildInfoDisplayVersion).$(BuildInfoVersion)</BuildInfoFullVersion>
       <BuildInfoTitle Condition="'$(BuildInfoTitle)' == ''">$(ApplicationTitle)</BuildInfoTitle>
 
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_AndroidPackage)</BuildInfoId>
@@ -37,6 +38,7 @@
       <BuildInfo Condition="'$(BuildInfoId)' != ''" Include="Id" Value="$(BuildInfoId)" />
       <BuildInfo Condition="'$(BuildInfoVersion)' != ''" Include="Version" Value="$(BuildInfoVersion)" />
       <BuildInfo Condition="'$(BuildInfoDisplayVersion)' != ''" Include="DisplayVersion" Value="$(BuildInfoDisplayVersion)" />
+      <BuildInfo Condition="'$(BuildInfoFullVersion)' != ''" Include="FullVersion" Value="$(BuildInfoFullVersion)" />
       <BuildInfo Condition="'$(BuildInfoTitle)' != ''" Include="Title" Value="$(BuildInfoTitle)" />
     </ItemGroup>
 
@@ -66,9 +68,11 @@
     <Delete Files="@(BuildInfoFiles)" />
   </Target>
 
-
   <Target Name="MSBuildInfoAfterBuild" AfterTargets="Build" DependsOnTargets="MSBuildInfoGenerate" />
 
+  <!-- Targets for ad-hoc building -->
+  <Target Name="BuildInfo" DependsOnTargets="MSBuildInfoGenerate" />
+  <Target Name="MSBuildInfo" DependsOnTargets="MSBuildInfoGenerate" />
 
   <Import Condition="Exists('$(ProjectDir)BuildInfo.targets')" Project="$(ProjectDir)BuildInfo.targets" />
   <Import Condition="Exists('$(ProjectDir)MSBuildInfo.targets')" Project="$(ProjectDir)MSBuildInfo.targets" />

@@ -28,10 +28,18 @@ You can also add the content directly to your project (.csproj) file
 
 In both cases you just add more entries of
 ```xml
-    <BuildInfo Include="Key" Value="Value" />
+<BuildInfo Include="Key" Value="Value" />
 ```
 
 You cannot do both. MSBuild will only pick up the one defined last in the build process.
+
+# Generate Build Info
+You can generate the BuildInfo.json without building your project. 
+This can come in handy if you need info about your build configuration without waiting for the entire build.
+
+```bash
+dotnet build -t:MSBuildInfo
+```
 
 # TLDR;
 Reference this NuGet and add this file next to you project file (.csproj):
