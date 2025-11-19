@@ -14,7 +14,8 @@
       <BuildInfoPackageId Condition="'$(BuildInfoPackageId)' == ''">$(PackageId)</BuildInfoPackageId>
       <BuildInfoVersion Condition="'$(BuildInfoVersion)' == ''">$(ApplicationVersion)</BuildInfoVersion>
       <BuildInfoDisplayVersion Condition="'$(BuildInfoDisplayVersion)' == ''">$(ApplicationDisplayVersion)</BuildInfoDisplayVersion>
-      <BuildInfoFullVersion Condition="'$(BuildInfoFullVersion)' == ''">$(BuildInfoDisplayVersion).$(BuildInfoVersion)</BuildInfoFullVersion>
+      <BuildInfoFullVersion Condition="'$(BuildInfoFullVersion)' == '' AND '$(BuildInfoDisplayVersion)' != ''">$(BuildInfoDisplayVersion)</BuildInfoFullVersion>
+      <BuildInfoFullVersion Condition="'$(BuildInfoFullVersion)' != '' AND '$(BuildInfoVersion)' != ''">$(BuildInfoFullVersion).$(BuildInfoVersion)</BuildInfoFullVersion>
       <BuildInfoTitle Condition="'$(BuildInfoTitle)' == ''">$(ApplicationTitle)</BuildInfoTitle>
 
       <BuildInfoId Condition="'$(BuildInfoId)' == ''">$(_AndroidPackage)</BuildInfoId>
