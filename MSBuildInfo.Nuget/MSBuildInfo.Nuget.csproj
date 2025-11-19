@@ -29,7 +29,7 @@
     <PackageTags>MSBuild dotnet maui Diagnostic Analyzer Properties</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/MarLoe/MSBuildInfo</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/MarLoe/MAUI.Native.Embedded</RepositoryUrl>
+    <RepositoryUrl>https://github.com/MarLoe/MSBuildInfo</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
