@@ -14,6 +14,7 @@
       <BuildInfoPackageId Condition="'$(BuildInfoPackageId)' == ''">$(PackageId)</BuildInfoPackageId>
       <BuildInfoVersion Condition="'$(BuildInfoVersion)' == ''">$(ApplicationVersion)</BuildInfoVersion>
       <BuildInfoDisplayVersion Condition="'$(BuildInfoDisplayVersion)' == ''">$(ApplicationDisplayVersion)</BuildInfoDisplayVersion>
+      <BuildInfoDisplayVersion Condition="'$(BuildInfoDisplayVersion)' == ''">$(Version)</BuildInfoDisplayVersion>
       <BuildInfoFullVersion Condition="'$(BuildInfoFullVersion)' == '' AND '$(BuildInfoDisplayVersion)' != ''">$(BuildInfoDisplayVersion)</BuildInfoFullVersion>
       <BuildInfoFullVersion Condition="'$(BuildInfoFullVersion)' != '' AND '$(BuildInfoVersion)' != ''">$(BuildInfoFullVersion).$(BuildInfoVersion)</BuildInfoFullVersion>
       <BuildInfoTitle Condition="'$(BuildInfoTitle)' == ''">$(ApplicationTitle)</BuildInfoTitle>
