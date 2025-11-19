@@ -16,7 +16,7 @@
   <PropertyGroup>
     <Title>MSBuildInfo Generator</Title>
     <PackageId>MSBuildInfo</PackageId>
-    <Version>0.3.2</Version>
+    <Version>0.4.1</Version>
     <Authors>Martin Løbger</Authors>
     <Owner>Martin Løbger</Owner>
     <Description>Generates a json file during build - containing information about the build</Description>
@@ -29,7 +29,7 @@
     <PackageTags>MSBuild dotnet maui Diagnostic Analyzer Properties</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/MarLoe/MSBuildInfo</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/MarLoe/MAUI.Native.Embedded</RepositoryUrl>
+    <RepositoryUrl>https://github.com/MarLoe/MSBuildInfo</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
